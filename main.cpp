@@ -1,19 +1,26 @@
 #include <SFML/Graphics.hpp>
-
-
-
-
-
-// THIS IS A TEST COMMIT !!!!!!!
-
-
-
+#include <iostream>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Red);
+    const int wWidth = 1100;
+    const int wHeight = 800;
+    sf::RenderWindow window(sf::VideoMode(wWidth, wHeight), "My window");
+
+    sf::CircleShape shape(50.f);
+    shape.setFillColor(sf::Color::Yellow);
+    shape.setPosition(300.0f, 300.0f);
+    float shapeMoveSpeed = 0.01f;
+
+    sf::Font myfont;
+    if (!myfont.loadFromFile("fonts/0xProtoNerdFont-Regular.ttf"))
+    {
+        std::cerr << "could not load font!\n";
+        return -1;
+    }
+
+    sf::Text text("font test", myfont, 24);
+    text.setPosition(0, wHeight - static_cast<float>(text.getCharacterSize()));
 
     while (window.isOpen())
     {
@@ -24,8 +31,12 @@ int main()
                 window.close();
         }
 
-        window.clear();
+        
+        shape.setPosition(shape.getPosition().x + shapeMoveSpeed, shape.getPosition().y + shapeMoveSpeed);
+
+        window.clear(sf::Color::Black);
         window.draw(shape);
+        window.draw(text);
         window.display();
     }
 

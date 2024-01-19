@@ -27,7 +27,7 @@ case $choice in
         g++ main.o -o $appname -lsfml-graphics -lsfml-window -lsfml-system
         ./$appname
         ;;
-    3)
+    3)  
        
         ./$appname
         ;;
